@@ -1,0 +1,57 @@
+# CCRes - Linux/Unix Makefile
+# Builds the command-line converter only (no GUI)
+
+CC = gcc
+CFLAGS = -I. -DHAVE_STRCASECMP -DHAVE_STRNCASECMP -Wall -Wno-parentheses -O2
+LDFLAGS =
+
+TARGET = ccres
+
+SRCS = CMD.c Convert.c Error.c Utils.c Library.c Eval.c \
+       _Object.c _Window.c _Menu.c _SaveAs.c _Iconbar.c \
+       _Scale.c _ColourDbox.c _ColourMenu.c _DCS.c \
+       _FileInfo.c _FontDbox.c _FontMenu.c _PrintDbox.c \
+       _ProgInfo.c _Quit.c _Gadgets.c _Icon.c
+
+OBJS = $(SRCS:.c=.o)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+test: $(TARGET)
+	@echo "=== Resource file round-trip tests ==="
+	@pass=0; fail=0; \
+	for f in TestQueue/Res01/*; do \
+		name=$$(basename "$$f"); \
+		./$(TARGET) "$$f" "/tmp/ccres_t1_$$name.txt" 2>/dev/null && \
+		./$(TARGET) "/tmp/ccres_t1_$$name.txt" "/tmp/ccres_t2_$$name.bin" 2>/dev/null && \
+		./$(TARGET) "/tmp/ccres_t2_$$name.bin" "/tmp/ccres_t3_$$name.txt" 2>/dev/null && \
+		if diff -q "/tmp/ccres_t1_$$name.txt" "/tmp/ccres_t3_$$name.txt" > /dev/null 2>&1; then \
+			echo "  PASS: $$name"; pass=$$((pass+1)); \
+		else \
+			echo "  FAIL: $$name"; fail=$$((fail+1)); \
+		fi; \
+	done; \
+	echo "=== Template file round-trip tests ==="; \
+	for f in TestQueue/Tem01/*; do \
+		name=$$(basename "$$f"); \
+		./$(TARGET) "$$f" "/tmp/ccres_t1_$$name.txt" 2>/dev/null && \
+		./$(TARGET) "/tmp/ccres_t1_$$name.txt" "/tmp/ccres_t2_$$name.bin" 2>/dev/null && \
+		./$(TARGET) "/tmp/ccres_t2_$$name.bin" "/tmp/ccres_t3_$$name.txt" 2>/dev/null && \
+		if diff -q "/tmp/ccres_t1_$$name.txt" "/tmp/ccres_t3_$$name.txt" > /dev/null 2>&1; then \
+			echo "  PASS: $$name"; pass=$$((pass+1)); \
+		else \
+			echo "  FAIL: $$name"; fail=$$((fail+1)); \
+		fi; \
+	done; \
+	echo "=== Results: $$pass passed, $$fail failed ==="
+
+.PHONY: all clean test
