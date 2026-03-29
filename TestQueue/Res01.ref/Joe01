@@ -863,7 +863,7 @@ fontdbox_object {
   header_flags:
   version:100
   object_name:"FontDbox"
-  fontdbox_flags:
+  fontdbox_flags:fontdbox_INCLUDE_SYSTEM_FONT
   title:""
   title_limit:*
   initial_font:"Trinity.Medium"
