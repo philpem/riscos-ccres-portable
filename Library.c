@@ -52,7 +52,7 @@ return d - from;
  */
 {
 const char *d = from++;
-while ((*to++ = *d++) >= ' ')
+while ((*(unsigned char *)to++ = *(unsigned char *)d++) >= ' ')
   /* */;
 
 return d - from;
@@ -72,7 +72,7 @@ return d - from;
 if (max == 0)
   return;
 
-while (--max && *from >= ' ')
+while (--max && *(unsigned char *)from >= ' ')
   *to++ = *from++;
 *to = '\0';
 }
