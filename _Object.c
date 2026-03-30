@@ -269,10 +269,9 @@ static bool put_tstring(DATA *data, char *pszIn, int nOffset, char *object, STRI
 	STRINGTABLE *pTable;
 	int * pInt;
 	char *pszEntry, *pszLimit, *pstr;
-	int cbEntry, cbLimit, nTable;
+	int cbEntry, cbLimit;
 
 	pTable = &data->StringTable;
-	nTable = toolbox_RELOCATE_STRING_REFERENCE;
 
 	/* A template string is terminated with "\r". */
 	if ((pszEntry = parse(data, pszIn, StringList->pszEntry)) != NULL) {
