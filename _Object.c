@@ -268,7 +268,7 @@ static bool put_tstring(DATA *data, char *pszIn, int nOffset, char *object, STRI
 {
 	STRINGTABLE *pTable;
 	int * pInt;
-	char *pszEntry, *pszLimit, *pstr;
+	char *pszEntry, *pszLimit, *pstr = NULL;
 	int cbEntry, cbLimit;
 
 	pTable = &data->StringTable;
