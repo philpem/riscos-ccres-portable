@@ -1,3 +1,24 @@
+CCRes 1.13 Portable
+~~~~~~~~~~~~~~~~~~~
+
+This is a version of CCres 1.13 and OSLib which have been modified to build on
+Linux (and other non-RISC OS systems). I wanted to make the contents of
+Template files searchable in other tools, and there was no pre-existing tool
+to do this ... so I ported CCres.
+
+Please don't bother the original authors with bug reports relating to this
+version, it has nothing to do with them...
+
+This is provided under the terms of the original licences (GNU GPL V2, with a
+linking exception in the case of OSLib) in the hope that it may be useful. No
+warranty is provided express or implied.
+
+Phil Pemberton, 2026-03-30.
+
+
+
+--- The original README follows below ---
+
 Purpose
 ~~~~~~~
 !CCres converts Toolbox Resource files (type FAE, RESF v1.00 or v1.01) and
