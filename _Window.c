@@ -289,7 +289,7 @@ _window_gadget_added:
 	}
 	if (gadget_count > 0) {
 		window_object->gadget_count = gadget_count;
-		window_object->gadgets = (toolbox_object_offset) ((char *) sizeof(window_object_base) + (shortcut_count * sizeof(keyboardshortcut_object)));
+		window_object->gadgets = (toolbox_object_offset) (sizeof(window_object_base) + (shortcut_count * sizeof(keyboardshortcut_object)));
 	} else {
 		window_object->gadgets = (toolbox_object_offset) -1;
 	}
