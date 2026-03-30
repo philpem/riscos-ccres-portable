@@ -13,6 +13,10 @@ This is provided under the terms of the original licences (GNU GPL V2, with a
 linking exception in the case of OSLib) in the hope that it may be useful. No
 warranty is provided express or implied.
 
+To build:
+
+  make -f Makefile.linux
+
 Phil Pemberton, 2026-03-30.
 
 
